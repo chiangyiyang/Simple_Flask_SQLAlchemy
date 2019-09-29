@@ -1,4 +1,5 @@
 from main import db, Device
+from sqlalchemy import exc
 
 # 建立資料庫
 # db.create_all()
@@ -83,9 +84,10 @@ if model is not None:       # 查詢結果檢查
     db.session.add(model)
 
     # 寫回資料庫
-    db.session.commit()
+    try:
+        db.session.commit()
+    except exc.IntegrityError as error:
+        print(error)
+        print("資料庫中已經有一筆資料name='a01'")
 
-# 資料沒有修改，產生sqlalchemy.exc.IntegrityError的錯誤，
-# 這是因為資料庫中已經有一筆資料name='a01'，依據Device資料模型
-# name必須是"唯一"，因此無法再有一筆name='a01'的資料
-# 程式也因此中斷，可以加上 try... except...攔截錯誤，避免中斷
+# 程式避免中斷了
