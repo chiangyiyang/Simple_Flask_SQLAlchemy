@@ -36,6 +36,12 @@ class DhtLog(db.Model):
     device_id = db.Column(db.Integer, db.ForeignKey('device.id'),
         nullable=False)
 
+    # 建立關聯至"Device資料模型"的屬性"device"，並
+    # 使"Device資料模型"有反向參考的屬性"dht_logs"，
+    # 且採用lazy-loading方式載入相關資料
+    device = db.relationship('Device',
+        backref=db.backref('dht_logs', lazy=True))
+
     def __repr__(self):
         return '<DhtLog id:%r timestamp:%s temperature:%r humidity:%r>' % (
             self.id, self.timestamp, self.temperature, self.humidity)

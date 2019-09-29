@@ -156,5 +156,7 @@ for i in range(1, 2):
             )
         db.session.add(dht_log)
     db.session.commit()
+    print(device.dht_logs)
+    
 
 # 觀察資料庫內容
