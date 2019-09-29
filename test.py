@@ -38,10 +38,16 @@ from main import db, Device
 # print(all_devices[0].name, all_devices[0].longitude, all_devices[0].latitude)
 
 # 查詢第3比Device的資料
-device_3 = Device.query.get(3)
-print(type(device_3))
-print(device_3)
-print(device_3.name, device_3.longitude, device_3.latitude)
+# device_3 = Device.query.get(3)
+# print(type(device_3))
+# print(device_3)
+# print(device_3.name, device_3.longitude, device_3.latitude)
+
+# 查詢name='a05'的Device資料
+device_a05 = Device.query.filter_by(name='a05').first()
+print(type(device_a05))
+print(device_a05)
+print(device_a05.name, device_a05.longitude, device_a05.latitude)
 
 # 觀察資料庫內容
 
