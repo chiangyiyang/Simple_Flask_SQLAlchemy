@@ -66,6 +66,7 @@ db.session.add(model)
 # 寫回資料庫
 db.session.commit()
 
-
-# 觀察資料庫內容
-
+# 再執行一次
+# 產生錯誤，因為找不到Device.name='d01'的資料
+# 程式直接中斷，可以加上查詢結果檢查，以避免中
+# 斷後續工作
