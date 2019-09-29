@@ -13,5 +13,8 @@ print(type(model))
 print(model)
 print(model.name, model.longitude, model.latitude)
 
+# 將資料加入到本次資料庫存取的Session中
+db.session.add(model)
+
 # 觀察資料庫內容
 # 目前尚未有新增資料
