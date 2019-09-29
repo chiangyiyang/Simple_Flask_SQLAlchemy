@@ -11,3 +11,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = \
     "sqlite:///" + os.path.join(basedir, "data.sqlite")
 # 建立資料庫物件
 db = SQLAlchemy(app)
+
+# 宣告Device資料模型
+class Device(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), unique=True, nullable=False)
+    longitude = db.Column(db.Float)
+    latitude = db.Column(db.Float)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
