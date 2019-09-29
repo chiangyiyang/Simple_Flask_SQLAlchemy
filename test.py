@@ -20,4 +20,6 @@ db.session.add(model)
 db.session.commit()
 
 # 觀察資料庫內容
-# 資料已經新增
+# 資料沒有新增，有sqlalchemy.exc.IntegrityError的錯誤發生
+# 這是因為資料庫中已經有一筆資料name='d01'，依據Device資料模型
+# name必須是"唯一"，因此無法再新增一筆name='d01'的資料
