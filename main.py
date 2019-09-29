@@ -31,6 +31,11 @@ class DhtLog(db.Model):
     temperature = db.Column(db.Float)
     humidity = db.Column(db.Float)
 
+    # 設定device_id欄位為與"Device資料模型"的"id欄位"關聯
+    # 也就是device_id欄位內的值，"必須"是在"Device資料模型"的"id欄位"有的值之一
+    device_id = db.Column(db.Integer, db.ForeignKey('device.id'),
+        nullable=False)
+
     def __repr__(self):
         return '<DhtLog id:%r timestamp:%s temperature:%r humidity:%r>' % (
             self.id, self.timestamp, self.temperature, self.humidity)

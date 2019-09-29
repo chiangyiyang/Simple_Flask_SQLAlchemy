@@ -1,4 +1,5 @@
-from main import db, Device
+from datetime import datetime, timedelta
+from main import db, Device, DhtLog
 from sqlalchemy import exc
 
 
@@ -104,7 +105,7 @@ from sqlalchemy import exc
 # model = Device.query.filter_by(name='a01').first()
 # if model is not None:       # 查詢結果檢查
 #     print("\t找到Device.name='a01'的資料==>", model)
-    
+
 #     # 將刪除資訊加入Session中
 #     db.session.delete(model)
 
@@ -135,10 +136,25 @@ from sqlalchemy import exc
 # print('id:', model.id)
 
 
-
 # 打掉重練
 db.drop_all()
 db.create_all()
 
+# 新增資料
+for i in range(1, 2):
+    device = Device(name='a0%d' % i,
+               longitude=121 + (i/10),
+               latitude=23 + (i/20))
+    db.session.add(device)
+    db.session.commit()
+    for j in range(3):
+        dht_log = DhtLog(
+                timestamp=datetime.utcnow() + timedelta(minutes=1),
+                temperature=23 + (i/10),
+                humidity=90 + + (i/10),
+                device_id=device.id
+            )
+        db.session.add(dht_log)
+    db.session.commit()
 
 # 觀察資料庫內容
