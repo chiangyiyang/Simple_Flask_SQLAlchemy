@@ -55,18 +55,17 @@ from main import db, Device
 # 將Device.name='d01'的資料，改成name='a01'
 # 首先找Device.name='d01'的資料
 model = Device.query.filter_by(name='d01').first()
-print("\t找到Device.name='d01'的資料==>", model)
+if model is not None:       # 查詢結果檢查
+    print("\t找到Device.name='d01'的資料==>", model)
 
-# 修改內容
-model.name = 'a01'
+    # 修改內容
+    model.name = 'a01'
 
-# 加入Session
-db.session.add(model)
+    # 加入Session
+    db.session.add(model)
 
-# 寫回資料庫
-db.session.commit()
+    # 寫回資料庫
+    db.session.commit()
 
-# 再執行一次
-# 產生錯誤，因為找不到Device.name='d01'的資料
-# 程式直接中斷，可以加上查詢結果檢查，以避免中
-# 斷後續工作
+# 找不到Device.name='d01'的資料，但沒有產生
+# 錯誤
