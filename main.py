@@ -23,3 +23,14 @@ class Device(db.Model):
 
     def __repr__(self):
         return '<Device %r>' % self.name
+
+# 宣告DhtLog資料模型
+class DhtLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime, index=True)
+    temperature = db.Column(db.Float)
+    humidity = db.Column(db.Float)
+
+    def __repr__(self):
+        return '<DhtLog id:%r timestamp:%s temperature:%r humidity:%r>' % (
+            self.id, self.timestamp, self.temperature, self.humidity)

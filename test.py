@@ -113,29 +113,32 @@ from sqlalchemy import exc
 
 
 # 再執行新增Device.name='a01'的資料一次
-model = Device(name='a01')
+# model = Device(name='a01')
 
-db.session.add(model)
+# db.session.add(model)
 
-print('commit前')
-print(model)
-print('name:', model.name)
-print('id:', model.id)
+# print('commit前')
+# print(model)
+# print('name:', model.name)
+# print('id:', model.id)
 
-# 寫回資料庫
-try:
-    db.session.commit()
-except exc.IntegrityError as error:
-    print(error)
-    print("資料庫中已經有一筆資料name='a01'")
+# # 寫回資料庫
+# try:
+#     db.session.commit()
+# except exc.IntegrityError as error:
+#     print(error)
+#     print("資料庫中已經有一筆資料name='a01'")
 
-print('commit後')
-print(model)
-print('name:', model.name)
-print('id:', model.id)
+# print('commit後')
+# print(model)
+# print('name:', model.name)
+# print('id:', model.id)
 
 
-# 觀察資料庫內容，資料沒有新增
-# 觀察commit後，id=None
-# 這是因為資料庫中已經有Device.name='a01'的資料，
-# 無法再新增，也就沒有賦予新的id值
+
+# 打掉重練
+db.drop_all()
+db.create_all()
+
+
+# 觀察資料庫內容
