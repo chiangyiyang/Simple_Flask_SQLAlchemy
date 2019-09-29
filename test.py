@@ -46,10 +46,26 @@ from main import db, Device
 # 查詢name='a05'的Device資料
 # device_a05 = Device.query.filter_by(name='a05').first()
 # 另一種查法
-device_a05 = Device.query.filter(Device.name=='a05').first()
-print(type(device_a05))
-print(device_a05)
-print(device_a05.name, device_a05.longitude, device_a05.latitude)
+# device_a05 = Device.query.filter(Device.name=='a05').first()
+# print(type(device_a05))
+# print(device_a05)
+# print(device_a05.name, device_a05.longitude, device_a05.latitude)
+
+# 修改一筆資料
+# 將Device.name='d01'的資料，改成name='a01'
+# 首先找Device.name='d01'的資料
+model = Device.query.filter_by(name='d01').first()
+print("\t找到Device.name='d01'的資料==>", model)
+
+# 修改內容
+model.name = 'a01'
+
+# 加入Session
+db.session.add(model)
+
+# 寫回資料庫
+db.session.commit()
+
 
 # 觀察資料庫內容
 
