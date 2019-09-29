@@ -1,14 +1,17 @@
-from main import db
+from main import db, Device
 
 # 建立資料庫
 # db.create_all()
 
 # 清空資料庫
-db.drop_all()
+# db.drop_all()
 
-# 使用DB Browser for SQLite觀察資料庫內容
-# DB Browser下載位置:
-#   for 32-bit Windows
-#   https://download.sqlitebrowser.org/DB.Browser.for.SQLite-3.11.2-win32.zip
-#   for 64-bit Windows
-#   https://download.sqlitebrowser.org/DB.Browser.for.SQLite-3.11.2-win64.zip
+# 建立Device資料模型
+model = Device(name='d01', longitude='121.5', latitude='23.5')
+
+print(type(model))
+print(model)
+print(model.name, model.longitude, model.latitude)
+
+# 觀察資料庫內容
+# 目前尚未有新增資料

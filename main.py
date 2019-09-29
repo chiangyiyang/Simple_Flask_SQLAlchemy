@@ -22,4 +22,4 @@ class Device(db.Model):
     latitude = db.Column(db.Float)
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<Device %r>' % self.name
