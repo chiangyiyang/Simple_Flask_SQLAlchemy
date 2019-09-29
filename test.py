@@ -112,7 +112,7 @@ from sqlalchemy import exc
 #     db.session.commit()
 
 
-# 再新增一筆Device.name='a01'的資料
+# 再執行新增Device.name='a01'的資料一次
 model = Device(name='a01')
 
 db.session.add(model)
@@ -135,9 +135,7 @@ print('name:', model.name)
 print('id:', model.id)
 
 
-# 觀察資料庫內容，資料已經新增
-# 觀察commit前，id=None
-# 觀察commit後，id=10
-# 這id是SQLAlchemy規定每個資料模型都要有的，其值由資料庫產生
-# 在commit前，尚未存取資料庫，所以id=None
-# 在commit後，資料庫給一個目前最大的id值10，而不是1
+# 觀察資料庫內容，資料沒有新增
+# 觀察commit後，id=None
+# 這是因為資料庫中已經有Device.name='a01'的資料，
+# 無法再新增，也就沒有賦予新的id值
