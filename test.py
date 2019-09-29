@@ -101,15 +101,43 @@ from sqlalchemy import exc
 # 刪除一筆資料
 # 將Device.name='a01'的資料刪除
 # 首先找Device.name='a02'的資料
-model = Device.query.filter_by(name='a01').first()
-if model is not None:       # 查詢結果檢查
-    print("\t找到Device.name='a01'的資料==>", model)
+# model = Device.query.filter_by(name='a01').first()
+# if model is not None:       # 查詢結果檢查
+#     print("\t找到Device.name='a01'的資料==>", model)
     
-    # 將刪除資訊加入Session中
-    db.session.delete(model)
+#     # 將刪除資訊加入Session中
+#     db.session.delete(model)
 
-    # 寫回資料庫
+#     # 寫回資料庫
+#     db.session.commit()
+
+
+# 再新增一筆Device.name='a01'的資料
+model = Device(name='a01')
+
+db.session.add(model)
+
+print('commit前')
+print(model)
+print('name:', model.name)
+print('id:', model.id)
+
+# 寫回資料庫
+try:
     db.session.commit()
+except exc.IntegrityError as error:
+    print(error)
+    print("資料庫中已經有一筆資料name='a01'")
+
+print('commit後')
+print(model)
+print('name:', model.name)
+print('id:', model.id)
 
 
-# 觀察資料庫內容，資料已經刪除
+# 觀察資料庫內容，資料已經新增
+# 觀察commit前，id=None
+# 觀察commit後，id=10
+# 這id是SQLAlchemy規定每個資料模型都要有的，其值由資料庫產生
+# 在commit前，尚未存取資料庫，所以id=None
+# 在commit後，資料庫給一個目前最大的id值10，而不是1
