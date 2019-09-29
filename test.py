@@ -54,9 +54,27 @@ from main import db, Device
 # 修改一筆資料
 # 將Device.name='d01'的資料，改成name='a01'
 # 首先找Device.name='d01'的資料
-model = Device.query.filter_by(name='d01').first()
+# model = Device.query.filter_by(name='d01').first()
+# if model is not None:       # 查詢結果檢查
+#     print("\t找到Device.name='d01'的資料==>", model)
+
+#     # 修改內容
+#     model.name = 'a01'
+
+#     # 加入Session
+#     db.session.add(model)
+
+#     # 寫回資料庫
+#     db.session.commit()
+
+
+
+# 再修改一筆資料
+# 將Device.name='a02'的資料，也改成name='a01'
+# 首先找Device.name='a02'的資料
+model = Device.query.filter_by(name='a02').first()
 if model is not None:       # 查詢結果檢查
-    print("\t找到Device.name='d01'的資料==>", model)
+    print("\t找到Device.name='a02'的資料==>", model)
 
     # 修改內容
     model.name = 'a01'
@@ -67,5 +85,7 @@ if model is not None:       # 查詢結果檢查
     # 寫回資料庫
     db.session.commit()
 
-# 找不到Device.name='d01'的資料，但沒有產生
-# 錯誤
+# 資料沒有修改，產生sqlalchemy.exc.IntegrityError的錯誤，
+# 這是因為資料庫中已經有一筆資料name='a01'，依據Device資料模型
+# name必須是"唯一"，因此無法再有一筆name='a01'的資料
+# 程式也因此中斷，可以加上 try... except...攔截錯誤，避免中斷
