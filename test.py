@@ -1,7 +1,7 @@
 from main import db, Device
 
 # 建立資料庫
-# db.create_all()
+db.create_all()
 
 # 清空資料庫
 # db.drop_all()
@@ -16,5 +16,8 @@ print(model.name, model.longitude, model.latitude)
 # 將資料加入到本次資料庫存取的Session中
 db.session.add(model)
 
+# 將本次資料庫存取的Session寫入資料庫，寫入前資料庫必須要已經建立
+db.session.commit()
+
 # 觀察資料庫內容
-# 目前尚未有新增資料
+# 資料已經新增
