@@ -20,13 +20,22 @@ from main import db, Device
 # db.session.commit()
 
 # 一次新增多筆資料
-for i in range(2,10):
-    db.session.add(
-        Device(name='a0%d' % i,
-            longitude=121 + (i/10),
-            latitude=23 + (i/20))
-    )
-db.session.commit()
+# for i in range(2,10):
+#     db.session.add(
+#         Device(name='a0%d' % i,
+#             longitude=121 + (i/10),
+#             latitude=23 + (i/20))
+#     )
+# db.session.commit()
+
+# 查詢所有Device的資料
+all_devices = Device.query.all()
+
+print(type(all_devices))
+print(all_devices)
+print(type(all_devices[0]))
+print(all_devices[0])
+print(all_devices[0].name, all_devices[0].longitude, all_devices[0].latitude)
 
 # 觀察資料庫內容
 
