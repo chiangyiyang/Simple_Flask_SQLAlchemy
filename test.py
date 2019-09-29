@@ -44,7 +44,9 @@ from main import db, Device
 # print(device_3.name, device_3.longitude, device_3.latitude)
 
 # 查詢name='a05'的Device資料
-device_a05 = Device.query.filter_by(name='a05').first()
+# device_a05 = Device.query.filter_by(name='a05').first()
+# 另一種查法
+device_a05 = Device.query.filter(Device.name=='a05').first()
 print(type(device_a05))
 print(device_a05)
 print(device_a05.name, device_a05.longitude, device_a05.latitude)
